@@ -52,7 +52,7 @@ class InstagramPost extends StatelessWidget {
                     ],
                   ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         post.user.name,
@@ -60,14 +60,11 @@ class InstagramPost extends StatelessWidget {
                       ),
                       smallMediumSizedBoxSizeWidth,
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 1.0),
-                          child: Text(
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            post.text,
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
+                        child: Text(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          post.text,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ),
                       largeSizedBoxSizeHeight,

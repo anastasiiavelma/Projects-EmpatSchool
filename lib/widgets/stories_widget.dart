@@ -17,7 +17,6 @@ class Stories extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Stack(alignment: Alignment.bottomRight, children: [
                   Container(
