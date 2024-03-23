@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasks/models/post.dart';
-import 'package:tasks/theme/constants.dart';
+import 'package:tasks/utils/constants.dart';
 
 class InstagramPost extends StatelessWidget {
   const InstagramPost({super.key});
@@ -28,7 +28,7 @@ class InstagramPost extends StatelessWidget {
                         post.user.name,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      const Spacer(),
+                      spacer,
                       Icon(
                         Icons.more_horiz,
                         color: Theme.of(context).iconTheme.color,
@@ -52,7 +52,7 @@ class InstagramPost extends StatelessWidget {
                     ],
                   ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         post.user.name,

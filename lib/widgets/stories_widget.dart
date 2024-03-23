@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasks/models/user.dart';
-import 'package:tasks/theme/constants.dart';
+import 'package:tasks/utils/constants.dart';
 
 class Stories extends StatelessWidget {
   const Stories({Key? key}) : super(key: key);
@@ -51,7 +51,7 @@ class Stories extends StatelessWidget {
                   ),
                   if (index == 0)
                     Container(
-                      padding: const EdgeInsets.all(2),
+                      padding: smallPadding,
                       decoration: BoxDecoration(
                         color: kAccentColor,
                         shape: BoxShape.circle,

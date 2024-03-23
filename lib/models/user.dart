@@ -2,7 +2,6 @@ class User {
   final int id;
   final String name;
   late String? imageUrl;
-
   User({
     required this.id,
     required this.name,

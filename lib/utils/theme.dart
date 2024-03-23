@@ -10,6 +10,16 @@ ThemeData basicTheme() => ThemeData(
             fontSize: largeTextSize,
             color: kBackgroundColor,
             fontWeight: FontWeight.bold),
+        headlineLarge: TextStyle(
+          fontFamily: 'San Francisco',
+          fontSize: largeTextSize,
+          color: kBackgroundColor,
+        ),
+        titleMedium: TextStyle(
+            fontFamily: 'San Francisco',
+            fontSize: mediumTextSize,
+            color: kBackgroundColor,
+            fontWeight: FontWeight.bold),
         titleSmall: TextStyle(
             fontFamily: 'San Francisco',
             fontSize: smallTextSize,

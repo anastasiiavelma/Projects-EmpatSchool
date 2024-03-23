@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:tasks/screens/menu_screen.dart';
-import 'package:tasks/theme/theme.dart';
+import 'package:tasks/screens/home/main_screen.dart';
+import 'package:tasks/screens/menu/menu_screen.dart';
+import 'package:tasks/screens/message/message_screen.dart';
+import 'package:tasks/utils/theme.dart';
 
 void main() {
   runApp(
@@ -23,7 +25,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: basicTheme(),
       debugShowCheckedModeBanner: false,
-      home: const MenuScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MenuScreen(),
+        '/main': (context) => const MainScreen(),
+        '/messages': (context) => const MessagesScreen(),
+      },
     );
   }
 }

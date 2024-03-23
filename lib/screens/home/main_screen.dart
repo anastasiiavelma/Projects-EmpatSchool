@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tasks/theme/constants.dart';
+import 'package:tasks/utils/constants.dart';
 import 'package:tasks/widgets/post_widget.dart';
 import 'package:tasks/widgets/stories_widget.dart';
 
@@ -17,10 +17,13 @@ class MainScreen extends StatelessWidget {
             Icon(Icons.favorite_border,
                 color: Theme.of(context).iconTheme.color,
                 size: Theme.of(context).iconTheme.size),
-            const SizedBox(width: 15),
-            Icon(Icons.near_me,
-                color: Theme.of(context).iconTheme.color,
-                size: Theme.of(context).iconTheme.size),
+            mediumSizedBoxSizeWidth,
+            GestureDetector(
+              onTap: () => Navigator.pushNamed(context, '/messages'),
+              child: Icon(Icons.near_me,
+                  color: Theme.of(context).iconTheme.color,
+                  size: Theme.of(context).iconTheme.size),
+            ),
           ],
         ),
       ),
