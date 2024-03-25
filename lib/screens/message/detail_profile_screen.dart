@@ -51,11 +51,11 @@ class _DetailImageMessageState extends State<DetailImageMessage> {
                 profileIcons(context),
                 largeSizedBoxSizeHeight,
                 profileButtons(context),
-                mediumSizedBoxSizeHeight,
                 SizedBox(
-                  height: 500,
+                  height: 400,
                   child: userPhotos(context),
                 ),
+                largeSizedBoxSizeHeight,
               ],
             ),
           ),

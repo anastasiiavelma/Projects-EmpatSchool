@@ -17,6 +17,14 @@ class MessagesScreen extends StatefulWidget {
 class _MessagesScreenState extends State<MessagesScreen> {
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    _nameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,8 +92,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                       child: Row(
                         children: [
-                          InkWell(
-                            onTap: () => Navigator.of(context).push<void>(
+                          GestureDetector(
+                            onDoubleTap: () => Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
                                     DetailImageMessage(message: message),
@@ -97,17 +105,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                   flightDirection,
                                   fromHeroContext,
                                   toHeroContext) {
-                                final slowAnimation =
-                                    Tween<double>(begin: 0.0, end: 1.0).animate(
-                                        CurvedAnimation(
-                                            parent: animation,
-                                            curve: Curves.easeInOut));
-                                const offset = Offset(0.0, 0.1);
-
                                 return SlideTransition(
                                   position: Tween<Offset>(
-                                          begin: offset, end: Offset.zero)
-                                      .animate(slowAnimation),
+                                          begin: const Offset(0.0, 0.5),
+                                          end: Offset.zero)
+                                      .animate(animation),
                                   child: toHeroContext.widget,
                                 );
                               },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasks/screens/home/main_screen.dart';
+import 'package:tasks/screens/message/message_screen.dart';
 import 'package:tasks/utils/constants.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -11,98 +12,99 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
   int _selectedIndex = 0;
-  late AnimationController _animationController;
-  late Tween<Offset> _tween;
+  late TabController _tabController;
 
-  final List<Widget> _screens = [
-    const MainScreen(),
-    const MainScreen(),
-    const MainScreen(),
-    const MainScreen(),
-    const MainScreen(),
+  static const tabs = [
+    MainScreen(),
+    MessagesScreen(),
+    MainScreen(),
+    MessagesScreen(),
+    MainScreen(),
   ];
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 900),
-    )..forward();
-
-    _tween = Tween<Offset>(begin: const Offset(0.0, 0.5), end: Offset.zero);
+    _tabController = TabController(length: tabs.length, vsync: this);
+    _tabController.addListener(addListener);
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _tabController.dispose();
     super.dispose();
+  }
+
+  void addListener() {
+    setState(() {
+      _selectedIndex = _tabController.index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SlideTransition(
-        position: _animationController.drive(_tween),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: kPrimaryColor,
-          selectedItemColor: kBackgroundColor,
-          unselectedItemColor: itemColor,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-              _animationController.forward(from: 0.0);
-            });
-          },
-          currentIndex: _selectedIndex,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Theme.of(context).iconTheme.color,
-                size: Theme.of(context).iconTheme.size,
-              ),
-              label: 'Home',
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: kPrimaryColor,
+        selectedItemColor: kBackgroundColor,
+        unselectedItemColor: itemColor,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+            _tabController.animateTo(index);
+          });
+        },
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Theme.of(context).iconTheme.color,
+              size: Theme.of(context).iconTheme.size,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-                color: Theme.of(context).iconTheme.color,
-                size: Theme.of(context).iconTheme.size,
-              ),
-              label: 'Search',
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+              color: Theme.of(context).iconTheme.color,
+              size: Theme.of(context).iconTheme.size,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.add_box_outlined,
-                color: Theme.of(context).iconTheme.color,
-                size: Theme.of(context).iconTheme.size,
-              ),
-              label: 'Add',
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add_box_outlined,
+              color: Theme.of(context).iconTheme.color,
+              size: Theme.of(context).iconTheme.size,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite_border,
-                color: Theme.of(context).iconTheme.color,
-                size: Theme.of(context).iconTheme.size,
-              ),
-              label: 'Fav',
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite_border,
+              color: Theme.of(context).iconTheme.color,
+              size: Theme.of(context).iconTheme.size,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle,
-                color: Theme.of(context).iconTheme.color,
-                size: Theme.of(context).iconTheme.size,
-              ),
-              label: 'Me',
+            label: 'Fav',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_circle,
+              color: Theme.of(context).iconTheme.color,
+              size: Theme.of(context).iconTheme.size,
             ),
-          ],
-        ),
+            label: 'Me',
+          ),
+        ],
       ),
-      body: _screens[_selectedIndex],
+      body: TabBarView(
+        controller: _tabController,
+        children: tabs,
+      ),
     );
   }
 }
